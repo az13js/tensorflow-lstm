@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 import numpy as np
 
-def sequenceFormat(longSequence, length):
+def sequenceFormat(longSequence, length, vectorLength = 1):
     """将一个很长的一维数组转换成可以用于LSTM训练的数据集
 
     将一个很长的一维列表，按照length个元素组成一个小的列表的方式，截断，将下一
@@ -19,6 +19,7 @@ def sequenceFormat(longSequence, length):
     Args:
         longSequence: 一个长列表，结构是1维的。
         length: 截断长度。
+        vectorLength: 向量长度，默认是1
 
     Returns:
         一个元祖，元祖的第一个元素是输入，第二个元素是输出
@@ -29,15 +30,16 @@ def sequenceFormat(longSequence, length):
     for i in range(dataNumber):
         inputSequence.append(longSequence[i : (i + length)])
         predictNumber.append(longSequence[i + length])
-    return (np.array(inputSequence).reshape((dataNumber, length, 1)), np.array(predictNumber).reshape((dataNumber, 1)))
+    return (np.array(inputSequence).reshape((dataNumber, length, vectorLength)), np.array(predictNumber).reshape((dataNumber, vectorLength)))
 
-def predictSequence(model, inputSequence, length, predictLength):
+def predictSequence(model, inputSequence, length, predictLength, dim = 1):
     """根据inputSequence，让model预测predictLength个长度的数据"""
     result = []
     x = inputSequence
     for i in range(predictLength):
         x = x[-length:]
-        y = model.predict(np.array(x).reshape((1,length, 1)))
-        x.append(y[0][0])
-        result.append(y[0][0])
+        #print(x)
+        y = model.predict(np.array(x).reshape((1,length, dim)))
+        x.append(y[0])
+        result.append(y[0])
     return result
