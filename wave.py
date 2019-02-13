@@ -47,13 +47,13 @@ def buildWaveSequence(sequenceLength, t, d = 0):
 # 序列长度
 point = 50
 sequenceLength = 100
-numberOfLSTMUnit = 5
+numberOfLSTMUnit = 7
 inputSequence = buildWaveSequence(sequenceLength, 4)
 
 (x, y) = data.sequenceFormat(inputSequence, point)
 
 model = createLSTMModel(point, 1, numberOfLSTMUnit, False)
-model.compile(optimizer = tf.keras.optimizers.Adam(0.005), loss = "MSE")
+model.compile(optimizer = tf.keras.optimizers.Adam(0.002), loss = "MSE")
 model.fit(x, y, 10, 200)
 
 predictSequence = data.predictSequence(model, inputSequence, point, sequenceLength)
