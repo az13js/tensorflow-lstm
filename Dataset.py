@@ -40,6 +40,14 @@ def predictSequence(model, inputSequence, length, predictLength, dim = 1):
         x = x[-length:]
         #print(x)
         y = model.predict(np.array(x).reshape((1,length, dim)))
+        max_key = 0
+        max_value = y[0][max_key]
+        for j in range(len(y[0])):
+            if y[0][j] > max_value:
+                max_value = y[0][j]
+                max_key = j
+            y[0][j] = 0
+        y[0][max_key] = 1
         x.append(y[0])
         result.append(y[0])
     return result

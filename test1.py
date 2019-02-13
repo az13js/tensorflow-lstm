@@ -5,9 +5,9 @@ import Model
 import numpy as np
 
 # LSTM 处理的序列长度，根据多长的输入预测下一个值
-sequeceLength = 2
+sequeceLength = 10
 # LSTM 层数
-LSTMUnitNumber = 10
+LSTMUnitNumber = 1
 
 # 读取 test.txt 的内容并将其转换成字母向量列表的序列
 context = TextProcess.getListSequenceFromFile("test.txt")
@@ -21,15 +21,16 @@ model.compile(optimizer = Model.getOptimizers().Adam(0.0001), loss = "MSE")
 #model.compile(optimizer = Model.getOptimizers().Adam(0.0001), loss = Model.sigmoidCrossEntropy())
 #model.compile(optimizer = Model.getOptimizers().Adam(0.0001), loss = Model.sparseSoftmaxCrossEntropy())
 
-for i in range(100):
+for i in range(500):
     # 训练模型
-    model.fit(np.array(inputs), np.array(outputs), 1, 1);
+    loss = model.fit(np.array(inputs), np.array(outputs), 1, 1, verbose = 0);
+    # 输出最后一次损失
+    print(loss.history["loss"][-1])
     # 预测
-    predicts = Dataset.predictSequence(model, context, sequeceLength, 10, TextProcess.getVectorLength())
+    predicts = Dataset.predictSequence(model, context, sequeceLength, 40, TextProcess.getVectorLength())
     # 预测结果转换为字符串
     predictString = ""
     for wordVector in predicts:
-        print(wordVector)
         predictString += TextProcess.listToChar(wordVector)
     # 输出预测结果
     print(predictString)
