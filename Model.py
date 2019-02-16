@@ -15,6 +15,17 @@ def getOptimizers():
     return tf.keras.optimizers;
 
 def createLSTMModelForClassification(sequenceLength, dim = 1, LSTMUnitNumber = 2, returnFullOutputSequence = False):
+    """"创建一个LSTM模型
+
+    Args:
+        sequenceLength: 时间步长度
+        dim: 隐含层节点数
+        LSTMUnitNumber: LSTM的层数
+        returnFullOutputSequence: 是否最后返回整个预测的序列
+
+    Return:
+        返回一个Tensorflow的Keras的Sequential层
+    """
     if LSTMUnitNumber < 1:
         return False
     if LSTMUnitNumber == 1:
