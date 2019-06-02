@@ -40,7 +40,7 @@ def buildWaveSequence(sequenceLength, t, d = 0):
     y = []
     for i in range(sequenceLength):
         x = start + i * (t * 2 * math.pi) / move
-        y.append([0.5*math.sin(x)+0.28*math.sin(3*x)])
+        y.append([0.5 * (1 if math.sin(x) > 0 else -1 )])
     return y
 
 # 序列长度
@@ -49,11 +49,13 @@ point = 150
 x = [buildSinSequence(point, 4)]
 y = [buildWaveSequence(point, 4)]
 
-numberOfLSTMUnit = 1
+numberOfLSTMUnit = 9
 
 model = createLSTMModel(point, 1, numberOfLSTMUnit, True)
-model.compile(optimizer = tf.keras.optimizers.Adam(0.07), loss = "MSE")
-model.fit(np.array(x), np.array(y), 1, 300)
+model = tf.keras.models.load_model('model.h5')
+model.compile(optimizer = tf.keras.optimizers.Adam(0.00001), loss = "MSE")
+model.fit(np.array(x), np.array(y), 3, 1500)
+tf.keras.models.save_model(model, 'model.h5')
 y0 = model.predict(np.array(x))
 y1 = np.array(y)
 
