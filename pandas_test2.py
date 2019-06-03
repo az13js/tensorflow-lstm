@@ -17,3 +17,13 @@ data_frame.to_csv('test.csv')
 new_data_frame = pd.read_csv('test.csv')
 data = new_data_frame.get_values()
 print(data)
+
+# 可以用 len() 函数计算 DataFrame 对象数据的行数（不含标题）
+print('lines:')
+print(len(new_data_frame))
+
+# 从索引 0 开始拿10行，每行取第 2 列。从 0 开始计数
+print('type:')
+print(type(new_data_frame.iloc[0:10, 2]))
+print('data:')
+print(new_data_frame.iloc[0:10, 2])
