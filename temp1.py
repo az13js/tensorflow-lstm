@@ -26,7 +26,8 @@ def process(csv_file, input_data_file, output_data_file, input_length, output_le
         output_row_data.append(output_sequence)
     pd.DataFrame(input_row_data).to_csv(input_data_file)
     pd.DataFrame(output_row_data).to_csv(output_data_file)
+    return True
 
 if __name__ == "__main__":
     create_data()
-    process('test.csv', 'data_input.csv', 'data_output.csv', 9, 1, 2)
+    process('test.csv', 'data_input.csv', 'data_output.csv', 8, 2, 2)
