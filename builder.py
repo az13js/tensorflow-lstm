@@ -16,9 +16,9 @@ def build(file, lines = 3, columns = 4):
         line_data = []
         for j in range(columns):
             if 0 == j:
-                line_data.append(float(data[i][j] + 0.5 * np.random.normal(0, 1, 1)))
+                line_data.append(float(data[i][j] + 0.1 * np.random.normal(0, 2)))
             else:
-                line_data.append(float(data[i][0] + 0.5 * np.random.normal(0, 1, 1)))
+                line_data.append(float(data[i][0] + 0.1 * np.random.normal(0, 2)))
         data.append(line_data)
     data_frame = pd.DataFrame(data)
     data_frame.to_csv(file)
@@ -31,5 +31,5 @@ def show_build_data(file):
     plt.show()
 
 if __name__ == "__main__":
-    build('data.csv', 10, 3)
+    build('data.csv', 200, 1)
     show_build_data('data.csv')
