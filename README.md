@@ -15,3 +15,5 @@ Red line is input sequence. Green line is output sequence. Blue line is LSTM out
 ![image](./sinx.png)
 
 ![image](./wave.png)
+
+File `lstm-readme.py` include some comments, You can read it and know how to use API `tf.keras.layers.LSTM`.
