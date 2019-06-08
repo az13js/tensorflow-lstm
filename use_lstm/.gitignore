@@ -1,0 +1,5 @@
+*.ini
+*.pyc
+*.tar
+*.gz
+README.md
