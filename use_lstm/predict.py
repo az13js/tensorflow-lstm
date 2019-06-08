@@ -50,7 +50,7 @@ def predict(length, model_file, diff_file, normalization_file, model_input_lengt
     return result
 
 if __name__ == "__main__":
-    predict_data = predict(1000, "model.h5", "diff.csv", "normalization.csv", 10)
+    predict_data = predict(1000, "finally.h5", "diff.csv", "normalization.csv", 10)
     data_frame = pd.read_csv("data.csv")
     plt.plot(range(len(data_frame)), data_frame.iloc[0:len(data_frame), 1], 'b')
     plt.plot(range(len(data_frame), len(data_frame) + len(predict_data)), predict_data, 'r')

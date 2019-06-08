@@ -31,7 +31,7 @@ if __name__ == "__main__":
     (train_x, train_y) = tdb.train_data()
 
     # 训练模型
-    history_data = model.fit(train_x, train_y, batch_size = 100, epochs = 2000, verbose = 0, shuffle = True)
+    history_data = model.fit(train_x, train_y, batch_size = 100, epochs = 3000, verbose = 0, shuffle = True)
     model.save("finally.h5", overwrite=True, include_optimizer=True)
 
     # 显示训练过程的误差变化
